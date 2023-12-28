@@ -54,6 +54,7 @@ function App() {
                     fontFamily: "IBM Plex Mono",
                     fontSize: 14,
                   }}
+                  onChange={handleKeyDown}
                 />
               </div>
               <div className={styles.terminal}>
@@ -143,6 +144,13 @@ function App() {
   function handleDiffEditorDidMount(editor, monaco) {
     diffEditorRef.current = editor;
   }
+
+  // Function to handle key down events in the text area
+  function handleKeyDown(event) {
+    if (event.endsWith("\r\n")) {
+      submitCommand(editorRef.current.getValue())
+    }
+  };
 
   return (
     <div className={styles.shell}>
